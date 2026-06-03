@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cloud Computing Final Project Documentation - Docker, Portainer, Nginx Proxy Manager, Cloudflare deployment guide.">
+  <title>Cloud Computing Project Documentation</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2338bdf8'/%3E%3Cstop offset='100%25' style='stop-color:%23818cf8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='20' fill='%230a0e1a'/%3E%3Cpath d='M50 25c-12 0-22 7-25 17h-2c-7 0-13 6-13 13s6 13 13 13h54c7 0 13-6 13-13 0-6-4-11-10-12-2-11-12-18-23-18h-7z' fill='url(%23g)'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Floating Badge Icons ===== -->
+  <div class="floating-badges">
+
+    <div class="floating-badge fb-1">
+      <div class="fb-icon" style="background:linear-gradient(135deg,#2496ED,#1a7bc4)">
+        <svg viewBox="0 0 24 24" fill="#fff" width="20" height="20"><path d="M13.98 11.08h2.12a.19.19 0 0 0 .19-.19V9.01a.19.19 0 0 0-.19-.19h-2.12a.19.19 0 0 0-.19.19v1.88c0 .11.08.19.19.19zm-2.95-5.43h2.12a.19.19 0 0 0 .19-.19V3.58a.19.19 0 0 0-.19-.19h-2.12a.19.19 0 0 0-.19.19v1.88c0 .11.09.19.19.19zm0 2.71h2.12a.19.19 0 0 0 .19-.19V6.29a.19.19 0 0 0-.19-.19h-2.12a.19.19 0 0 0-.19.19v1.88c0 .11.09.19.19.19zm-2.93 0h2.12a.19.19 0 0 0 .19-.19V6.29a.19.19 0 0 0-.19-.19H8.1a.19.19 0 0 0-.19.19v1.88c0 .11.08.19.19.19zm-2.96 0h2.12a.19.19 0 0 0 .19-.19V6.29a.19.19 0 0 0-.19-.19H5.14a.19.19 0 0 0-.19.19v1.88c0 .11.09.19.19.19zm5.89 2.72h2.12a.19.19 0 0 0 .19-.19V9.01a.19.19 0 0 0-.19-.19h-2.12a.19.19 0 0 0-.19.19v1.88c0 .11.09.19.19.19zm-2.93 0h2.12a.19.19 0 0 0 .19-.19V9.01a.19.19 0 0 0-.19-.19H8.1a.19.19 0 0 0-.19.19v1.88c0 .11.08.19.19.19zm-2.96 0h2.12a.19.19 0 0 0 .19-.19V9.01a.19.19 0 0 0-.19-.19H5.14a.19.19 0 0 0-.19.19v1.88c0 .11.09.19.19.19zm-2.92 0h2.12a.19.19 0 0 0 .19-.19V9.01a.19.19 0 0 0-.19-.19H2.22a.19.19 0 0 0-.19.19v1.88c0 .11.08.19.19.19zM23.7 11.15c-.57-.39-1.88-.53-2.89-.34-.13-.93-.7-1.74-1.37-2.39l-.28-.24-.24.28c-.49.58-.77 1.39-.7 2.18.04.5.19.99.49 1.39-.23.13-.49.24-.72.34-.46.17-.96.27-1.45.27H.32l-.09.43a8.66 8.66 0 0 0 .72 4.42l.26.48.01.01c1.78 2.99 4.93 4.32 8.42 4.32 6.79 0 12.33-3.11 14.98-9.83.98.05 3.09.01 4.16-2.06l.06-.11-.27-.18z"/></svg>
+      </div>
+      <div class="fb-text">
+        <span class="fb-label">CONTAINERIZATION</span>
+        <span class="fb-name">Docker 🐳</span>
+      </div>
+    </div>
+
+    <div class="floating-badge fb-2">
+      <div class="fb-icon" style="background:linear-gradient(135deg,#E95420,#c94210)">
+        <svg viewBox="0 0 24 24" fill="#fff" width="20" height="20"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="3" r="2"/><circle cx="12" cy="21" r="2"/><circle cx="3" cy="12" r="2"/><circle cx="21" cy="12" r="2"/><line x1="12" y1="5" x2="12" y2="8" stroke="#fff" stroke-width="1.5"/><line x1="12" y1="16" x2="12" y2="19" stroke="#fff" stroke-width="1.5"/><line x1="5" y1="12" x2="8" y2="12" stroke="#fff" stroke-width="1.5"/><line x1="16" y1="12" x2="19" y2="12" stroke="#fff" stroke-width="1.5"/></svg>
+      </div>
+      <div class="fb-text">
+        <span class="fb-label">OPERATING SYSTEM</span>
+        <span class="fb-name">Ubuntu Server 🐧</span>
+      </div>
+    </div>
+
+    <div class="floating-badge fb-3">
+      <div class="fb-icon" style="background:linear-gradient(135deg,#38bdf8,#0ea5e9)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="20" height="20"><path d="M3 15a4 4 0 0 0 4 4h10a3 3 0 0 0 .93-5.86A5.5 5.5 0 0 0 7.47 10 4.5 4.5 0 0 0 3 15z"/></svg>
+      </div>
+      <div class="fb-text">
+        <span class="fb-label">CLOUD SERVER</span>
+        <span class="fb-name">VPS Tencent ☁️</span>
+      </div>
+    </div>
+
+    <div class="floating-badge fb-4">
+      <div class="fb-icon" style="background:linear-gradient(135deg,#34d399,#10b981)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="20" height="20"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M6 8h.01M9 8h.01M6 11h.01M9 11h.01" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="fb-text">
+        <span class="fb-label">PROXY MANAGER</span>
+        <span class="fb-name">Nginx NPM 🔀</span>
+      </div>
+    </div>
+
+    <div class="floating-badge fb-5">
+      <div class="fb-icon" style="background:linear-gradient(135deg,#818cf8,#6366f1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="20" height="20"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="#fff"/><circle cx="6" cy="18" r="1" fill="#fff"/><line x1="10" y1="6" x2="18" y2="6" stroke-linecap="round"/><line x1="10" y1="18" x2="18" y2="18" stroke-linecap="round"/></svg>
+      </div>
+      <div class="fb-text">
+        <span class="fb-label">MANAGEMENT</span>
+        <span class="fb-name">Portainer 📦</span>
+      </div>
+    </div>
+
+    <div class="floating-badge fb-6">
+      <div class="fb-icon" style="background:linear-gradient(135deg,#fb923c,#f97316)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="20" height="20"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      </div>
+      <div class="fb-text">
+        <span class="fb-label">DNS & CDN</span>
+        <span class="fb-name">Cloudflare ☁️</span>
+      </div>
+    </div>
+
+    <div class="floating-badge fb-7">
+      <div class="fb-icon" style="background:linear-gradient(135deg,#f472b6,#ec4899)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="20" height="20"><rect x="1" y="6" width="22" height="12" rx="2"/><path d="M1 10h22"/><circle cx="5" cy="14" r="1" fill="#fff"/><circle cx="9" cy="14" r="1" fill="#fff"/><path d="M5 6V4M9 6V4M15 6V4M19 6V4"/></svg>
+      </div>
+      <div class="fb-text">
+        <span class="fb-label">NETWORKING</span>
+        <span class="fb-name">Router & Firewall 🛡️</span>
+      </div>
+    </div>
+
+    <div class="floating-badge fb-8">
+      <div class="fb-icon" style="background:linear-gradient(135deg,#a78bfa,#7c3aed)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="20" height="20"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      </div>
+      <div class="fb-text">
+        <span class="fb-label">VERSION CONTROL</span>
+        <span class="fb-name">GitHub 🐙</span>
+      </div>
+    </div>
+
+    <div class="floating-badge fb-9">
+      <div class="fb-icon" style="background:linear-gradient(135deg,#facc15,#eab308)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <div class="fb-text">
+        <span class="fb-label">SECURITY</span>
+        <span class="fb-name">SSL / HTTPS 🔒</span>
+      </div>
+    </div>
+
+    <div class="floating-badge fb-10">
+      <div class="fb-icon" style="background:linear-gradient(135deg,#22d3ee,#06b6d4)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="20" height="20"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="7 15 10 12 7 9"/><line x1="13" y1="15" x2="17" y2="15"/></svg>
+      </div>
+      <div class="fb-text">
+        <span class="fb-label">TERMINAL</span>
+        <span class="fb-name">Linux CLI 💻</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== Mobile Overlay ===== -->
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar" id="navbar">
+    <a href="#" class="navbar-brand">
+      <div class="brand-icon">☁️</div>
+      CC Project
+    </a>
+    <div class="navbar-links" id="navLinks">
+      <a href="#topology">Topology</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#team">Team</a>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- ===== Hero Section ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        Cloud Computing Final Project
+      </div>
+      <h1>
+        Deploy with<br>
+        <span class="gradient-text">Docker & Cloud</span>
+      </h1>
+      <p class="hero-desc">Dokumentasi lengkap deployment web menggunakan Docker, Portainer, Nginx Proxy Manager, dan Cloudflare DNS pada dual VPS infrastructure.</p>
+      
+      <!-- Project Description -->
+      <div class="hero-about">
+        <p>Proyek ini merupakan tugas akhir mata kuliah <strong>Cloud Computing</strong> yang berfokus pada implementasi <em>containerization</em> dan <em>deployment</em> aplikasi web pada infrastruktur cloud. Setiap anggota kelompok men-deploy website portfolio masing-masing ke dalam Docker container yang berjalan di dua VPS (Virtual Private Server) yang saling terhubung melalui Portainer Agent. Traffic di-manage menggunakan Nginx Proxy Manager sebagai reverse proxy dengan SSL certificate dari Let's Encrypt, dan domain routing dikonfigurasi melalui Cloudflare DNS. Seluruh proses deployment terintegrasi dengan GitHub repository untuk continuous deployment.</p>
+      </div>
+
+      <div class="hero-techs">
+        <div class="tech-pill">🐳 Docker</div>
+        <div class="tech-pill">📦 Portainer</div>
+        <div class="tech-pill">🔀 Nginx Proxy</div>
+        <div class="tech-pill">☁️ Cloudflare</div>
+        <div class="tech-pill">🐙 GitHub</div>
+        <div class="tech-pill">🐧 Ubuntu</div>
+        <div class="tech-pill">🔒 SSL/HTTPS</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Topology Section ===== -->
+  <div class="section" id="topology">
+    <div class="section-header fade-in">
+      <div class="section-badge">Infrastructure</div>
+      <h2 class="section-title">Server Topology</h2>
+      <p class="section-desc">Dual VPS architecture dengan Portainer sebagai container orchestration dan Nginx Proxy Manager untuk reverse proxy.</p>
+    </div>
+
+    <div class="topology-grid">
+      <!-- VPS A -->
+      <div class="glass-card server-card fade-in">
+        <div class="card-icon">🖥️</div>
+        <h3>VPS A — Primary</h3>
+        <div class="domain">djakartalaundry.com</div>
+        <div class="ip-badge">43.157.223.246</div>
+        <div class="info-text">Portainer: port 9443</div>
+        <div class="member-list">
+          <div class="member-item">
+            <div class="member-info">
+              <div class="member-avatar">A</div>
+              <div>
+                <div class="member-name">Alfin</div>
+                <div class="member-subdomain">alfin.djakartalaundry.com</div>
+              </div>
+            </div>
+            <div class="member-port">:3001</div>
+          </div>
+          <div class="member-item">
+            <div class="member-info">
+              <div class="member-avatar">T</div>
+              <div>
+                <div class="member-name">Tio</div>
+                <div class="member-subdomain">tio.djakartalaundry.com</div>
+              </div>
+            </div>
+            <div class="member-port">:3002</div>
+          </div>
+          <div class="member-item">
+            <div class="member-info">
+              <div class="member-avatar">R</div>
+              <div>
+                <div class="member-name">Rendi</div>
+                <div class="member-subdomain">rendi.djakartalaundry.com</div>
+              </div>
+            </div>
+            <div class="member-port">:3003</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VPS B -->
+      <div class="glass-card server-card fade-in">
+        <div class="card-icon">🗄️</div>
+        <h3>VPS B — Secondary</h3>
+        <div class="domain">deepscan.web.id</div>
+        <div class="ip-badge">43.157.202.80</div>
+        <div class="info-text">Portainer: port 9443</div>
+        <div class="member-list">
+          <div class="member-item">
+            <div class="member-info">
+              <div class="member-avatar">Z</div>
+              <div>
+                <div class="member-name">Zihan</div>
+                <div class="member-subdomain">zihan.deepscan.web.id</div>
+              </div>
+            </div>
+            <div class="member-port">:3001</div>
+          </div>
+          <div class="member-item">
+            <div class="member-info">
+              <div class="member-avatar">H</div>
+              <div>
+                <div class="member-name">Hikmal</div>
+                <div class="member-subdomain">hikmal.deepscan.web.id</div>
+              </div>
+            </div>
+            <div class="member-port">:3002</div>
+          </div>
+          <div class="member-item">
+            <div class="member-info">
+              <div class="member-avatar">S</div>
+              <div>
+                <div class="member-name">Septito</div>
+                <div class="member-subdomain">septito.deepscan.web.id</div>
+              </div>
+            </div>
+            <div class="member-port">:3003</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Roadmap Timeline ===== -->
+  <div class="section" id="roadmap">
+    <div class="section-header fade-in">
+      <div class="section-badge">Roadmap</div>
+      <h2 class="section-title">Deployment Journey</h2>
+      <p class="section-desc">Step-by-step perjalanan deployment dari instalasi Docker hingga HTTPS live.</p>
+    </div>
+
+    <div class="road-timeline">
+      <div class="road-line"></div>
+
+      <!-- Step 1: Install Docker -->
+      <div class="road-step step-1">
+        <div class="road-step-content">
+          <div class="glass-card step-card">
+            <div class="step-number">Step 01</div>
+            <h3>Install Docker</h3>
+            <p>Install Docker engine pada VPS menggunakan official script dari Docker.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">bash</span>
+              </div>
+              <div class="code-body"><span class="cmd">sudo apt update</span> && <span class="cmd">sudo apt upgrade</span> <span class="flag">-y</span>
+
+<span class="cmd">curl</span> <span class="flag">-fsSL</span> https://get.docker.com | <span class="cmd">sh</span>
+
+<span class="cmd">sudo usermod</span> <span class="flag">-aG</span> docker <span class="str">$USER</span>
+
+<span class="cmd">newgrp</span> docker
+
+<span class="cmd">docker</span> <span class="flag">--version</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="road-marker">
+          <div class="road-marker-dot">🐳</div>
+        </div>
+        <div class="road-step-content"></div>
+      </div>
+
+      <!-- Step 2: Install Portainer -->
+      <div class="road-step step-2">
+        <div class="road-step-content">
+          <div class="glass-card step-card">
+            <div class="step-number">Step 02</div>
+            <h3>Install Portainer</h3>
+            <p>Deploy Portainer CE sebagai container management UI pada port 9443.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">bash</span>
+              </div>
+              <div class="code-body"><span class="cmd">docker volume create</span> <span class="str">portainer_data</span>
+
+<span class="cmd">docker run</span> <span class="flag">-d</span> \
+  <span class="flag">--name</span> portainer \
+  <span class="flag">--restart</span>=always \
+  <span class="flag">-p</span> <span class="str">9443:9443</span> \
+  <span class="flag">-p</span> <span class="str">8000:8000</span> \
+  <span class="flag">-v</span> /var/run/docker.sock:/var/run/docker.sock \
+  <span class="flag">-v</span> portainer_data:/data \
+  <span class="str">portainer/portainer-ce:lts</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="road-marker">
+          <div class="road-marker-dot">📦</div>
+        </div>
+        <div class="road-step-content"></div>
+      </div>
+
+      <!-- Step 3: Install Portainer Agent -->
+      <div class="road-step step-3">
+        <div class="road-step-content">
+          <div class="glass-card step-card">
+            <div class="step-number">Step 03</div>
+            <h3>Install Portainer Agent</h3>
+            <p>Deploy agent pada VPS lain agar bisa di-manage dari satu Portainer dashboard.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">bash</span>
+              </div>
+              <div class="code-body"><span class="cmd">docker run</span> <span class="flag">-d</span> \
+  <span class="flag">--name</span> portainer_agent \
+  <span class="flag">--restart</span>=always \
+  <span class="flag">-p</span> <span class="str">9001:9001</span> \
+  <span class="flag">-v</span> /var/run/docker.sock:/var/run/docker.sock \
+  <span class="flag">-v</span> /var/lib/docker/volumes:/var/lib/docker/volumes \
+  <span class="flag">-v</span> /:/host \
+  <span class="str">portainer/agent:lts</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="road-marker">
+          <div class="road-marker-dot">🔗</div>
+        </div>
+        <div class="road-step-content"></div>
+      </div>
+
+      <!-- Step 4: Install NPM -->
+      <div class="road-step step-4">
+        <div class="road-step-content">
+          <div class="glass-card step-card">
+            <div class="step-number">Step 04</div>
+            <h3>Install Nginx Proxy Manager</h3>
+            <p>Setup reverse proxy dengan SSL management untuk routing subdomain ke container.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">docker-compose.yml</span>
+              </div>
+              <div class="code-body"><span class="key">version</span>: <span class="str">'3'</span>
+
+<span class="key">services</span>:
+  <span class="key">npm</span>:
+    <span class="key">image</span>: <span class="str">jc21/nginx-proxy-manager:latest</span>
+    <span class="key">restart</span>: unless-stopped
+    <span class="key">ports</span>:
+      - <span class="str">"80:80"</span>
+      - <span class="str">"81:81"</span>
+      - <span class="str">"443:443"</span>
+    <span class="key">volumes</span>:
+      - <span class="str">./data:/data</span>
+      - <span class="str">./letsencrypt:/etc/letsencrypt</span></div>
+            </div>
+            <div class="code-block" style="margin-top:8px">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">bash</span>
+              </div>
+              <div class="code-body"><span class="cmd">docker compose up</span> <span class="flag">-d</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="road-marker">
+          <div class="road-marker-dot">🔀</div>
+        </div>
+        <div class="road-step-content"></div>
+      </div>
+
+      <!-- Step 5: Open Ports -->
+      <div class="road-step step-5">
+        <div class="road-step-content">
+          <div class="glass-card step-card">
+            <div class="step-number">Step 05</div>
+            <h3>Buka Port yang Diperlukan</h3>
+            <p>Pastikan semua port yang dibutuhkan sudah dibuka pada firewall VPS.</p>
+            <div class="port-grid">
+              <div class="port-item">
+                <div class="port-number" data-port="22">0</div>
+                <div class="port-label">SSH</div>
+              </div>
+              <div class="port-item">
+                <div class="port-number" data-port="80">0</div>
+                <div class="port-label">HTTP</div>
+              </div>
+              <div class="port-item">
+                <div class="port-number" data-port="81">0</div>
+                <div class="port-label">NPM UI</div>
+              </div>
+              <div class="port-item">
+                <div class="port-number" data-port="443">0</div>
+                <div class="port-label">HTTPS</div>
+              </div>
+              <div class="port-item">
+                <div class="port-number" data-port="9001">0</div>
+                <div class="port-label">Agent</div>
+              </div>
+              <div class="port-item">
+                <div class="port-number" data-port="9443">0</div>
+                <div class="port-label">Portainer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="road-marker">
+          <div class="road-marker-dot">🔓</div>
+        </div>
+        <div class="road-step-content"></div>
+      </div>
+
+      <!-- Step 6: Connect VPS -->
+      <div class="road-step step-6">
+        <div class="road-step-content">
+          <div class="glass-card step-card">
+            <div class="step-number">Step 06</div>
+            <h3>Hubungkan Dua VPS</h3>
+            <p>Tambahkan Environment di Portainer melalui Agent untuk mengelola kedua VPS dari satu dashboard.</p>
+            <div class="vps-connect-grid">
+              <div class="vps-connect-box">
+                <div class="vps-connect-label">VPS B → VPS A</div>
+                <div class="vps-connect-value">43.157.223.246:9001</div>
+              </div>
+              <div class="vps-connect-box">
+                <div class="vps-connect-label">VPS A → VPS B</div>
+                <div class="vps-connect-value">43.157.202.80:9001</div>
+              </div>
+            </div>
+            <p class="step-info-text">Path: Environment → Add Environment → Agent</p>
+          </div>
+        </div>
+        <div class="road-marker">
+          <div class="road-marker-dot">🔗</div>
+        </div>
+        <div class="road-step-content"></div>
+      </div>
+
+      <!-- Step 7: Deploy GitHub -->
+      <div class="road-step step-7">
+        <div class="road-step-content">
+          <div class="glass-card step-card">
+            <div class="step-number">Step 07</div>
+            <h3>Deploy dari GitHub</h3>
+            <p>Deploy stack melalui Portainer dengan repository GitHub.</p>
+            <div style="margin-top:12px">
+              <div class="repo-field">
+                <div class="repo-field-label">Repository URL</div>
+                <div class="repo-field-value">https://github.com/sep-ae/sep-ae.github.io.git</div>
+              </div>
+              <div class="repo-field">
+                <div class="repo-field-label">Compose Path</div>
+                <div class="repo-field-value">docker-compose.yml</div>
+              </div>
+            </div>
+            <p class="step-info-text">Stacks → Add Stack → Repository → Deploy Stack</p>
+          </div>
+        </div>
+        <div class="road-marker">
+          <div class="road-marker-dot">🐙</div>
+        </div>
+        <div class="road-step-content"></div>
+      </div>
+
+      <!-- Step 8: Dockerfile & Compose -->
+      <div class="road-step step-8">
+        <div class="road-step-content">
+          <div class="glass-card step-card">
+            <div class="step-number">Step 08</div>
+            <h3>Dockerfile & Compose</h3>
+            <p>Konfigurasi container menggunakan Nginx Alpine sebagai web server.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Dockerfile</span>
+              </div>
+              <div class="code-body"><span class="cmd">FROM</span> <span class="str">nginx:alpine</span>
+
+<span class="cmd">COPY</span> . /usr/share/nginx/html
+
+<span class="cmd">EXPOSE</span> <span class="str">80</span></div>
+            </div>
+            <div class="code-block" style="margin-top:8px">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">docker-compose.yml</span>
+              </div>
+              <div class="code-body"><span class="key">version</span>: <span class="str">'3'</span>
+
+<span class="key">services</span>:
+  <span class="key">septito-web</span>:
+    <span class="key">build</span>: <span class="str">.</span>
+    <span class="key">container_name</span>: <span class="str">septito-web</span>
+    <span class="key">ports</span>:
+      - <span class="str">"3003:80"</span>
+    <span class="key">restart</span>: unless-stopped</div>
+            </div>
+          </div>
+        </div>
+        <div class="road-marker">
+          <div class="road-marker-dot">📄</div>
+        </div>
+        <div class="road-step-content"></div>
+      </div>
+
+      <!-- Step 9: Cloudflare & NPM Config -->
+      <div class="road-step step-9">
+        <div class="road-step-content">
+          <div class="glass-card step-card">
+            <div class="step-number">Step 09</div>
+            <h3>Cloudflare DNS & NPM Config</h3>
+            <p>Pointing domain ke VPS dan setup proxy host di Nginx Proxy Manager.</p>
+
+            <div class="config-section-label">Cloudflare DNS Record</div>
+            <table class="config-table">
+              <tr><th>Type</th><th>Name</th><th>Content</th></tr>
+              <tr><td>A</td><td class="config-val">septito</td><td class="config-val">43.157.202.80</td></tr>
+            </table>
+
+            <div class="config-section-label" style="margin-top:20px">NPM Proxy Host</div>
+            <table class="config-table">
+              <tr><th>Field</th><th>Value</th></tr>
+              <tr><td>Domain</td><td class="config-val">septito.deepscan.web.id</td></tr>
+              <tr><td>Forward Host</td><td class="config-val">172.17.0.1</td></tr>
+              <tr><td>Port</td><td class="config-val">3003</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="road-marker">
+          <div class="road-marker-dot">☁️</div>
+        </div>
+        <div class="road-step-content"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== Architecture Section ===== -->
+  <div class="section" id="architecture">
+    <div class="section-header fade-in">
+      <div class="section-badge">Architecture</div>
+      <h2 class="section-title">Final Architecture</h2>
+      <p class="section-desc">Alur lengkap dari source code di GitHub hingga live HTTPS subdomain.</p>
+    </div>
+
+    <div class="arch-flow fade-in">
+      <div class="arch-node">
+        <div class="arch-icon">🐙</div>
+        <div class="arch-node-label">GitHub<br>Repository</div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node">
+        <div class="arch-icon">📦</div>
+        <div class="arch-node-label">Portainer<br>Stack</div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node">
+        <div class="arch-icon">🐳</div>
+        <div class="arch-node-label">Docker<br>Container</div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node">
+        <div class="arch-icon">🔀</div>
+        <div class="arch-node-label">Nginx Proxy<br>Manager</div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node">
+        <div class="arch-icon">☁️</div>
+        <div class="arch-node-label">Cloudflare<br>DNS</div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node">
+        <div class="arch-icon">🔒</div>
+        <div class="arch-node-label">HTTPS<br>Subdomain</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer" id="team">
+    <div class="footer-brand">☁️ Cloud Computing Project</div>
+    <div class="footer-members">
+      <span class="footer-member">Alfin</span>
+      <span class="footer-member">Tio</span>
+      <span class="footer-member">Rendi</span>
+      <span class="footer-member">Zihan</span>
+      <span class="footer-member">Hikmal</span>
+      <span class="footer-member">Septito</span>
+    </div>
+    <p>D3 Teknologi Informasi — Politeknik Negeri Madiun</p>
+  </footer>
+
+  <!-- ===== Scroll to Top ===== -->
+  <button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top">↑</button>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  septito-web:
+    build: .
+    container_name: septito-web
+    ports:
+      - "3005:80"
+    restart: unless-stopped
