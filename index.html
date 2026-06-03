@@ -286,7 +286,7 @@
           <div class="glass-card step-card">
             <div class="step-number">Step 01</div>
             <h3>Install Docker</h3>
-            <p>Install Docker engine pada VPS menggunakan official script dari Docker.</p>
+            <p>Langkah pertama adalah menyiapkan environment dasar dengan menginstall Docker Engine pada VPS. Proses ini menggunakan script instalasi resmi dari Docker agar mendapatkan versi stabil terbaru secara otomatis. Setelah terinstall, user default dimasukkan ke dalam grup docker agar kita dapat menjalankan berbagai perintah Docker tanpa harus selalu menggunakan hak akses <code>sudo</code> (root).</p>
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
@@ -316,7 +316,7 @@
           <div class="glass-card step-card">
             <div class="step-number">Step 02</div>
             <h3>Install Portainer</h3>
-            <p>Deploy Portainer CE sebagai container management UI pada port 9443.</p>
+            <p>Setelah Docker berjalan, kita mendeploy Portainer CE (Community Edition). Portainer berfungsi sebagai Graphical User Interface (GUI) berbasis web yang sangat canggih. Alat ini memudahkan kita memantau resource, melihat log, dan mendeploy container tanpa perlu mengetikkan perintah rumit di terminal. Dashboard manajemen ini dapat diakses secara aman melalui port 9443.</p>
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
@@ -347,7 +347,7 @@
           <div class="glass-card step-card">
             <div class="step-number">Step 03</div>
             <h3>Install Portainer Agent</h3>
-            <p>Deploy agent pada VPS lain agar bisa di-manage dari satu Portainer dashboard.</p>
+            <p>Karena arsitektur kita melibatkan lebih dari satu server fisik, kita perlu menginstall Portainer Agent di VPS sekunder (VPS B). Agent ini bertugas sebagai jembatan komunikasi sehingga VPS utama (VPS A) dapat mendeteksi, mengendalikan, dan mendeploy container ke VPS B, semuanya dilakukan terpusat hanya dari satu layar dashboard Portainer di VPS A.</p>
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
@@ -376,7 +376,7 @@
           <div class="glass-card step-card">
             <div class="step-number">Step 04</div>
             <h3>Install Nginx Proxy Manager</h3>
-            <p>Setup reverse proxy dengan SSL management untuk routing subdomain ke container.</p>
+            <p>Nginx Proxy Manager (NPM) diinstal menggunakan Docker Compose untuk bertindak sebagai pintu masuk utama atau <em>Reverse Proxy</em>. NPM menerima semua traffic pengunjung (port 80/443) lalu meneruskannya secara akurat ke container milik masing-masing anggota kelompok berdasarkan subdomain. NPM juga dilengkapi antarmuka web memukau untuk mengurus sertifikat SSL Let's Encrypt secara otomatis.</p>
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
@@ -417,7 +417,7 @@
           <div class="glass-card step-card">
             <div class="step-number">Step 05</div>
             <h3>Buka Port yang Diperlukan</h3>
-            <p>Pastikan semua port yang dibutuhkan sudah dibuka pada firewall VPS.</p>
+            <p>Untuk memastikan semua layanan container dapat diakses dengan lancar dari internet, kita wajib mengatur Firewall (Security Group) pada panel kontrol cloud provider (VPS). Port esensial yang dibuka meliputi HTTP/HTTPS (80, 443), antarmuka manajemen Portainer (9443), port komunikasi Portainer Agent (9001), dan port admin NPM (81).</p>
             <div class="port-grid">
               <div class="port-item">
                 <div class="port-number" data-port="22">0</div>
@@ -458,7 +458,7 @@
           <div class="glass-card step-card">
             <div class="step-number">Step 06</div>
             <h3>Hubungkan Dua VPS</h3>
-            <p>Tambahkan Environment di Portainer melalui Agent untuk mengelola kedua VPS dari satu dashboard.</p>
+            <p>Langkah integrasi sistem dilakukan di dalam dashboard Portainer (VPS A). Kita masuk ke menu "Environment" dan menambahkan IP publik VPS B bersama dengan port 9001 milik Portainer Agent yang sudah diinstal di langkah ke-3. Dengan begitu, kedua VPS saling terhubung dalam satu klaster terpadu untuk memudahkan manajemen deployment.</p>
             <div class="vps-connect-grid">
               <div class="vps-connect-box">
                 <div class="vps-connect-label">VPS B → VPS A</div>
@@ -484,7 +484,7 @@
           <div class="glass-card step-card">
             <div class="step-number">Step 07</div>
             <h3>Deploy dari GitHub</h3>
-            <p>Deploy stack melalui Portainer dengan repository GitHub.</p>
+            <p>Di sinilah kehebatan fitur GitOps pada Portainer bekerja! Kita tidak perlu memindahkan file source code (HTML/CSS/JS) secara manual via FTP ke server. Cukup salin URL repositori GitHub kita dan masukkan ke dalam menu <strong>Stacks</strong> di Portainer. Portainer akan secara otomatis mengunduh kode terbaru dari branch GitHub kamu, lalu mengeksekusi <code>docker-compose.yml</code> untuk membangun container. Jika ada update kode di GitHub di kemudian hari, Portainer bisa disetting agar me-redeploy web kita secara instan!</p>
             <div style="margin-top:12px">
               <div class="repo-field">
                 <div class="repo-field-label">Repository URL</div>
@@ -510,8 +510,9 @@
           <div class="glass-card step-card">
             <div class="step-number">Step 08</div>
             <h3>Dockerfile & Compose</h3>
-            <p>Konfigurasi container menggunakan Nginx Alpine sebagai web server.</p>
-            <div class="code-block">
+            
+            <p style="margin-bottom: 8px;"><strong>Dockerfile:</strong> Digunakan untuk membungkus (package) file HTML/CSS/JS web statis ke dalam image Docker berbasis ringan <code>nginx:alpine</code>.</p>
+            <div class="code-block" style="margin-bottom: 16px;">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
                 <span class="code-lang">Dockerfile</span>
@@ -522,7 +523,9 @@
 
 <span class="cmd">EXPOSE</span> <span class="str">80</span></div>
             </div>
-            <div class="code-block" style="margin-top:8px">
+
+            <p style="margin-bottom: 8px;"><strong>docker-compose.yml:</strong> Digunakan untuk mendefinisikan dan menjalankan container. Di sini kita menetapkan nama container <code>tutorial</code> dan memetakan port <code>3005</code> di VPS ke port <code>80</code> di dalam container.</p>
+            <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
                 <span class="code-lang">docker-compose.yml</span>
@@ -532,9 +535,9 @@
 <span class="key">services</span>:
   <span class="key">septito-web</span>:
     <span class="key">build</span>: <span class="str">.</span>
-    <span class="key">container_name</span>: <span class="str">septito-web</span>
+    <span class="key">container_name</span>: <span class="str">tutorial</span>
     <span class="key">ports</span>:
-      - <span class="str">"3003:80"</span>
+      - <span class="str">"3005:80"</span>
     <span class="key">restart</span>: unless-stopped</div>
             </div>
           </div>
@@ -551,7 +554,7 @@
           <div class="glass-card step-card">
             <div class="step-number">Step 09</div>
             <h3>Cloudflare DNS & NPM Config</h3>
-            <p>Pointing domain ke VPS dan setup proxy host di Nginx Proxy Manager.</p>
+            <p>Langkah pamungkas agar web portofolio dapat diakses menggunakan domain adalah konfigurasi DNS. Kita menambahkan A Record di Cloudflare yang mengarah ke IP publik VPS kita. Setelah domain aktif, langkah akhirnya adalah menambahkan "Proxy Host" baru di dashboard Nginx Proxy Manager. NPM akan membaca subdomain yang diminta pengunjung (misal: <code>septito...</code>), lalu membelokkan lalu lintas tersebut langsung ke port lokal (misal: <code>3005</code>) dari container Docker milik kita secara aman.</p>
 
             <div class="config-section-label">Cloudflare DNS Record</div>
             <table class="config-table">
@@ -564,7 +567,7 @@
               <tr><th>Field</th><th>Value</th></tr>
               <tr><td>Domain</td><td class="config-val">septito.deepscan.web.id</td></tr>
               <tr><td>Forward Host</td><td class="config-val">172.17.0.1</td></tr>
-              <tr><td>Port</td><td class="config-val">3003</td></tr>
+              <tr><td>Port</td><td class="config-val">3005</td></tr>
             </table>
           </div>
         </div>
