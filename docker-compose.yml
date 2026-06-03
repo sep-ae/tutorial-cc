@@ -3,7 +3,7 @@ version: '3'
 services:
   septito-web:
     build: .
-    container_name: septito-web
+    container_name: tutorial
     ports:
       - "3005:80"
     restart: unless-stopped
