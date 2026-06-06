@@ -43,6 +43,16 @@ body {
   color: #fff;
 }
 
+/* ===== PARTICLES JS ===== */
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
 /* ===== FLOATING BADGES ===== */
 .floating-badges {
   position: fixed;
@@ -435,6 +445,7 @@ body {
 
 /* ===== GLASS CARD ===== */
 .glass-card {
+  position: relative;
   background: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -442,6 +453,31 @@ body {
   border-radius: 20px;
   padding: 32px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(56, 189, 248, 0.1), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glass-card:hover::after {
+  opacity: 1;
+}
+
+/* Ensure content is above glow */
+.glass-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .glass-card:hover {
@@ -798,6 +834,32 @@ body {
   padding: 10px 16px;
   background: rgba(30, 41, 59, 0.5);
   border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+  position: relative;
+}
+
+.copy-btn {
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.copy-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+}
+
+.copy-btn.copied {
+  background: rgba(52, 211, 153, 0.2);
+  border-color: rgba(52, 211, 153, 0.4);
+  color: #34d399;
 }
 
 .code-dots {

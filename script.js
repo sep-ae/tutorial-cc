@@ -108,6 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const rotateY = ((x - centerX) / centerX) * 4;
 
         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        
+        // Glow-Follow-Cursor
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
       });
 
       card.addEventListener('mouseleave', () => {
@@ -190,4 +194,136 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ===== PARTICLES.JS BACKGROUND =====
+  if (typeof particlesJS !== 'undefined') {
+    particlesJS('particles-js', {
+      "particles": {
+        "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": ["#38bdf8", "#818cf8", "#c084fc"] },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.5, "random": true },
+        "size": { "value": 3, "random": true },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#38bdf8",
+          "opacity": 0.2,
+          "width": 1
+        },
+        "move": { "enable": true, "speed": 1.5, "direction": "none", "out_mode": "out" }
+      },
+      "interactivity": {
+        "detect_on": "window",
+        "events": {
+          "onhover": { "enable": true, "mode": "grab" },
+          "onclick": { "enable": true, "mode": "push" }
+        },
+        "modes": {
+          "grab": { "distance": 140, "line_linked": { "opacity": 0.6 } },
+          "push": { "particles_nb": 3 }
+        }
+      },
+      "retina_detect": true
+    });
+  }
+
+  // ===== COPY CODE BUTTON =====
+  document.querySelectorAll('.code-block').forEach(block => {
+    const header = block.querySelector('.code-header');
+    if (header) {
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'copy-btn';
+      copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy';
+      header.appendChild(copyBtn);
+
+      copyBtn.addEventListener('click', () => {
+        const codeBody = block.querySelector('.code-body');
+        if (codeBody) {
+          const textToCopy = codeBody.innerText;
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+            copyBtn.classList.add('copied');
+            setTimeout(() => {
+              copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy';
+              copyBtn.classList.remove('copied');
+            }, 2000);
+          });
+        }
+      });
+    }
+  });
+
+  // ===== LIVE TERMINAL SIMULATION =====
+  function typeHTMLRecursive(originalNode, targetElement, speed, callback) {
+    const childNodes = Array.from(originalNode.childNodes);
+    let currentChildIndex = 0;
+    
+    function processNextChild() {
+        if (currentChildIndex >= childNodes.length) {
+            if (callback) callback();
+            return;
+        }
+        
+        const node = childNodes[currentChildIndex];
+        currentChildIndex++;
+        
+        if (node.nodeType === Node.TEXT_NODE) {
+            let text = node.textContent;
+            let charIndex = 0;
+            const textNode = document.createTextNode('');
+            targetElement.appendChild(textNode);
+            
+            function typeChar() {
+                if (charIndex < text.length) {
+                    textNode.textContent += text.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeChar, speed + (Math.random() * 20));
+                } else {
+                    processNextChild();
+                }
+            }
+            typeChar();
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+            const clone = node.cloneNode(false);
+            targetElement.appendChild(clone);
+            typeHTMLRecursive(node, clone, speed, processNextChild);
+        }
+    }
+    
+    processNextChild();
+  }
+
+  const terminalObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const codeBody = entry.target;
+        
+        // Only run for bash blocks
+        const langSpan = codeBody.previousElementSibling?.querySelector('.code-lang');
+        if (langSpan && langSpan.textContent.trim() === 'bash') {
+           observer.unobserve(codeBody);
+           
+           // Clone the nodes
+           const tempDiv = document.createElement('div');
+           tempDiv.innerHTML = codeBody.innerHTML;
+           
+           codeBody.innerHTML = '';
+           
+           // Add a blinking cursor block
+           codeBody.style.position = 'relative';
+           const cursor = document.createElement('span');
+           cursor.style.cssText = 'display:inline-block; width:8px; height:15px; background:#38bdf8; margin-left:4px; vertical-align:middle; animation:pulse 1s infinite;';
+           
+           typeHTMLRecursive(tempDiv, codeBody, 15, () => {
+             // Append cursor at the end and keep it blinking
+             codeBody.appendChild(cursor);
+           });
+        }
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.code-body').forEach(el => terminalObserver.observe(el));
+
 });
+

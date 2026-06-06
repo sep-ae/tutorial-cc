@@ -19,6 +19,8 @@
 </head>
 <body>
 
+  <!-- ===== Particles Background ===== -->
+  <div id="particles-js"></div>
   <!-- ===== Floating Badge Icons ===== -->
   <div class="floating-badges">
 
@@ -198,7 +200,7 @@
               <div class="member-avatar">A</div>
               <div>
                 <div class="member-name">Alfin</div>
-                <div class="member-subdomain">alfin.djakartalaundry.com</div>
+                <a href="https://alfin.djakartalaundry.com" target="_blank" class="member-subdomain">alfin.djakartalaundry.com ↗</a>
               </div>
             </div>
             <div class="member-port">:3001</div>
@@ -208,7 +210,7 @@
               <div class="member-avatar">T</div>
               <div>
                 <div class="member-name">Tio</div>
-                <div class="member-subdomain">tio.djakartalaundry.com</div>
+                <a href="https://tio.djakartalaundry.com" target="_blank" class="member-subdomain">tio.djakartalaundry.com ↗</a>
               </div>
             </div>
             <div class="member-port">:3002</div>
@@ -218,7 +220,7 @@
               <div class="member-avatar">R</div>
               <div>
                 <div class="member-name">Rendi</div>
-                <div class="member-subdomain">rendi.djakartalaundry.com</div>
+                <a href="https://rendi.djakartalaundry.com" target="_blank" class="member-subdomain">rendi.djakartalaundry.com ↗</a>
               </div>
             </div>
             <div class="member-port">:3003</div>
@@ -236,33 +238,33 @@
         <div class="member-list">
           <div class="member-item">
             <div class="member-info">
-              <div class="member-avatar">Z</div>
+              <div class="member-avatar">S</div>
               <div>
-                <div class="member-name">Zihan</div>
-                <div class="member-subdomain">zihan.deepscan.web.id</div>
+                <div class="member-name">Septito</div>
+                <a href="https://septito.deepscan.web.id" target="_blank" class="member-subdomain">septito.deepscan.web.id ↗</a>
               </div>
             </div>
             <div class="member-port">:3001</div>
           </div>
           <div class="member-item">
             <div class="member-info">
-              <div class="member-avatar">H</div>
+              <div class="member-avatar">Z</div>
               <div>
-                <div class="member-name">Hikmal</div>
-                <div class="member-subdomain">hikmal.deepscan.web.id</div>
-              </div>
-            </div>
-            <div class="member-port">:3002</div>
-          </div>
-          <div class="member-item">
-            <div class="member-info">
-              <div class="member-avatar">S</div>
-              <div>
-                <div class="member-name">Septito</div>
-                <div class="member-subdomain">septito.deepscan.web.id</div>
+                <div class="member-name">Zihan</div>
+                <a href="https://zihan.deepscan.web.id" target="_blank" class="member-subdomain">zihan.deepscan.web.id ↗</a>
               </div>
             </div>
             <div class="member-port">:3003</div>
+          </div>
+          <div class="member-item">
+            <div class="member-info">
+              <div class="member-avatar">H</div>
+              <div>
+                <div class="member-name">Hikmal</div>
+                <a href="https://hikmal.deepscan.web.id" target="_blank" class="member-subdomain">hikmal.deepscan.web.id ↗</a>
+              </div>
+            </div>
+            <div class="member-port">:3004</div>
           </div>
         </div>
       </div>
@@ -317,6 +319,19 @@
             <div class="step-number">Step 02</div>
             <h3>Install Portainer</h3>
             <p>Setelah Docker berjalan, kita mendeploy Portainer CE (Community Edition). Portainer berfungsi sebagai Graphical User Interface (GUI) berbasis web yang sangat canggih. Alat ini memudahkan kita memantau resource, melihat log, dan mendeploy container tanpa perlu mengetikkan perintah rumit di terminal. Dashboard manajemen ini dapat diakses secara aman melalui port 9443.</p>
+            
+            <!-- Portainer Credentials -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0;">
+              <div style="background: rgba(2, 6, 23, 0.6); padding: 16px; border-radius: 12px; border: 1px solid rgba(56,189,248,0.2);">
+                <h4 style="color: #38bdf8; margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">🖥️ VPS A Portainer</h4>
+                <a href="https://43.157.223.246:9443/" target="_blank" style="display: flex; justify-content: center; align-items: center; background: rgba(56,189,248,0.15); color: #38bdf8; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(56,189,248,0.3); transition: all 0.3s;" onmouseover="this.style.background='rgba(56,189,248,0.25)'" onmouseout="this.style.background='rgba(56,189,248,0.15)'">Buka VPS A ↗</a>
+              </div>
+              <div style="background: rgba(2, 6, 23, 0.6); padding: 16px; border-radius: 12px; border: 1px solid rgba(129,140,248,0.2);">
+                <h4 style="color: #818cf8; margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">🗄️ VPS B Portainer</h4>
+                <a href="https://43.157.202.80:9443/" target="_blank" style="display: flex; justify-content: center; align-items: center; background: rgba(129,140,248,0.15); color: #818cf8; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(129,140,248,0.3); transition: all 0.3s;" onmouseover="this.style.background='rgba(129,140,248,0.25)'" onmouseout="this.style.background='rgba(129,140,248,0.15)'">Buka VPS B ↗</a>
+              </div>
+            </div>
+
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
@@ -569,10 +584,39 @@
               <tr><td>Forward Host</td><td class="config-val">172.17.0.1</td></tr>
               <tr><td>Port</td><td class="config-val">3005</td></tr>
             </table>
+
+            <div style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <a href="http://43.157.223.246:81" target="_blank" style="display: flex; justify-content: center; align-items: center; background: rgba(52, 211, 153, 0.15); color: #34d399; padding: 10px; border-radius: 8px; font-weight: 600; text-decoration: none; border: 1px solid rgba(52, 211, 153, 0.3); transition: all 0.3s;" onmouseover="this.style.background='rgba(52, 211, 153, 0.25)'" onmouseout="this.style.background='rgba(52, 211, 153, 0.15)'">Buka NPM VPS A ↗</a>
+              <a href="http://43.157.202.80:81" target="_blank" style="display: flex; justify-content: center; align-items: center; background: rgba(52, 211, 153, 0.15); color: #34d399; padding: 10px; border-radius: 8px; font-weight: 600; text-decoration: none; border: 1px solid rgba(52, 211, 153, 0.3); transition: all 0.3s;" onmouseover="this.style.background='rgba(52, 211, 153, 0.25)'" onmouseout="this.style.background='rgba(52, 211, 153, 0.15)'">Buka NPM VPS B ↗</a>
+            </div>
           </div>
         </div>
         <div class="road-marker">
           <div class="road-marker-dot">☁️</div>
+        </div>
+        <div class="road-step-content"></div>
+      </div>
+
+      <!-- Step 10: Final Results -->
+      <div class="road-step step-10">
+        <div class="road-step-content">
+          <div class="glass-card step-card" style="border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);">
+            <div class="step-number" style="color: #38bdf8;">Step 10</div>
+            <h3>🚀 Final Results</h3>
+            <p>Klik tombol di bawah ini untuk melihat hasil akhir dari deployment web portofolio kami masing-masing yang sudah berhasil di-online-kan!</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
+              <a href="https://alfin.djakartalaundry.com" target="_blank" style="display: flex; align-items: center; justify-content: center; background: rgba(56, 189, 248, 0.1); color: #38bdf8; padding: 10px; border-radius: 8px; text-decoration: none; border: 1px solid rgba(56, 189, 248, 0.2); font-weight: 600; transition: all 0.3s;" onmouseover="this.style.background='rgba(56, 189, 248, 0.2)'" onmouseout="this.style.background='rgba(56, 189, 248, 0.1)'">Alfin ↗</a>
+              <a href="https://tio.djakartalaundry.com" target="_blank" style="display: flex; align-items: center; justify-content: center; background: rgba(56, 189, 248, 0.1); color: #38bdf8; padding: 10px; border-radius: 8px; text-decoration: none; border: 1px solid rgba(56, 189, 248, 0.2); font-weight: 600; transition: all 0.3s;" onmouseover="this.style.background='rgba(56, 189, 248, 0.2)'" onmouseout="this.style.background='rgba(56, 189, 248, 0.1)'">Tio ↗</a>
+              <a href="https://rendi.djakartalaundry.com" target="_blank" style="display: flex; align-items: center; justify-content: center; background: rgba(56, 189, 248, 0.1); color: #38bdf8; padding: 10px; border-radius: 8px; text-decoration: none; border: 1px solid rgba(56, 189, 248, 0.2); font-weight: 600; transition: all 0.3s;" onmouseover="this.style.background='rgba(56, 189, 248, 0.2)'" onmouseout="this.style.background='rgba(56, 189, 248, 0.1)'">Rendi ↗</a>
+              <a href="https://septito.deepscan.web.id" target="_blank" style="display: flex; align-items: center; justify-content: center; background: rgba(129, 140, 248, 0.1); color: #818cf8; padding: 10px; border-radius: 8px; text-decoration: none; border: 1px solid rgba(129, 140, 248, 0.2); font-weight: 600; transition: all 0.3s;" onmouseover="this.style.background='rgba(129, 140, 248, 0.2)'" onmouseout="this.style.background='rgba(129, 140, 248, 0.1)'">Septito ↗</a>
+              <a href="https://zihan.deepscan.web.id" target="_blank" style="display: flex; align-items: center; justify-content: center; background: rgba(129, 140, 248, 0.1); color: #818cf8; padding: 10px; border-radius: 8px; text-decoration: none; border: 1px solid rgba(129, 140, 248, 0.2); font-weight: 600; transition: all 0.3s;" onmouseover="this.style.background='rgba(129, 140, 248, 0.2)'" onmouseout="this.style.background='rgba(129, 140, 248, 0.1)'">Zihan ↗</a>
+              <a href="https://hikmal.deepscan.web.id" target="_blank" style="display: flex; align-items: center; justify-content: center; background: rgba(129, 140, 248, 0.1); color: #818cf8; padding: 10px; border-radius: 8px; text-decoration: none; border: 1px solid rgba(129, 140, 248, 0.2); font-weight: 600; transition: all 0.3s;" onmouseover="this.style.background='rgba(129, 140, 248, 0.2)'" onmouseout="this.style.background='rgba(129, 140, 248, 0.1)'">Hikmal ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="road-marker">
+          <div class="road-marker-dot" style="border-color: #38bdf8; color: #38bdf8;">🎉</div>
         </div>
         <div class="road-step-content"></div>
       </div>
@@ -639,6 +683,7 @@
   <button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top">↑</button>
 
   <!-- JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
