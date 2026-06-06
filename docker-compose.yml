@@ -1,11 +1,10 @@
 version: '3'
 
 services:
-  septito-web:
-    image: nginx:alpine
+  tutorial:
+    build: .
+    image: tutorial:v2
     container_name: tutorial
     ports:
       - "3005:80"
-    volumes:
-      - ./:/usr/share/nginx/html
     restart: unless-stopped
